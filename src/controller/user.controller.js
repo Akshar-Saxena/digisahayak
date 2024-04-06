@@ -15,9 +15,16 @@ async function loginController(req, res) {
             { expiresIn: "24h" }
         );
         if (pass == results[0].password) {
-            res.status(200).cookie("token", token).json({
-                message: "Login Successful",
-            });
+            res.status(200)
+                .cookie("token", token, {
+                    sameSite: "none",
+                    expires: new Date(Date.now() + 86400000),
+                    httpOnly: true,
+                    secure: true,
+                })
+                .json({
+                    message: "Login Successful",
+                });
         } else {
             res.status(404).json({
                 message: "Invalid Credentials",

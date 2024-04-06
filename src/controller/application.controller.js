@@ -2,6 +2,12 @@ import jwt from "jsonwebtoken";
 import { applicationModel } from "../models/application.model.js";
 import { v4 } from "uuid";
 
+function extractPincode(address) {
+    const pincodePattern = /\b\d{6}\b/g;
+    const match = address.match(pincodePattern);
+    return match ? match[0] : null;
+}
+
 function applicationController(req, res) {
     const data = req.body;
     console.log(req.cookies);

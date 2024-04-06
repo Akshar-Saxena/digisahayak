@@ -19,6 +19,9 @@ const applicationSchema = mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        volunteerAssigned: {
+            type: String,
+        },
     },
     {
         versionKey: false,
